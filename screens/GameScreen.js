@@ -57,28 +57,28 @@ const GameScreen = ({selectedNumber}) => {
     }
 
   return (
-    <View>
-        <Text>Computer Guess: </Text>
-        <NumberContainer>{currentGuess}</NumberContainer>
-        <Card style={styles.buttonContainer}>
-            <Button title='Lower' onPress={ () => {nextGuess(Constants.direction.lower)} } />
-            <Button title='Higher' onPress={ () => {nextGuess(Constants.direction.higher)} } />
-        </Card>
+    <View style={styles.screen}>
+      <Text>Computer Guess: </Text>
+      <NumberContainer>{currentGuess}</NumberContainer>
+      <Card style={styles.buttonContainer}>
+          <Button title='Lower' onPress={ () => {nextGuess(Constants.direction.lower)} } />
+          <Button title='Higher' onPress={ () => {nextGuess(Constants.direction.higher)} } />
+      </Card>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        padding: 10,
-        alignItems: 'center'
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginTop: 20,
-    }
+  screen: {
+      flex: 1,
+      padding: 10,
+      alignItems: 'center',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+  }
 })
 
 export default GameScreen
