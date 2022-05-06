@@ -5,7 +5,7 @@ import Colors from "../constants/Colors";
 import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
  
- const StartGameScreen = ({ onStartGame }) => {
+ const StartGameScreen = ({ onStartGame}) => {
     //useStateSnippet
     const [enteredValue, setEnteredValue] = useState('')
     const [confirmed, setConfirmed] = useState(false)

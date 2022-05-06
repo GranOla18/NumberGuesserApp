@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import { Button, StyleSheet, Text, TextInput, View, Alert } from "react-native";
 import Card from '../components/Card';
 import NumberContainer from '../components/NumberContainer';
@@ -20,6 +20,7 @@ import Constants from '../constants/constants';
 //     }
 // }
 
+
 const generateRandomBetween = (min, max, exclude) => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -37,23 +38,49 @@ const generateRandomBetween = (min, max, exclude) => {
   }
   
 
-const GameScreen = ({selectedNumber}) => {
+const GameScreen = ({selectedNumber, onGameOver}) => {
 
     const currentLow = useRef(1);
     const currentHigh = useRef(100);
     //generateRandomBetween(currentLow.current, currentHigh.current, selectedNumber
-    const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(1, 100, selectedNumber));
+    //const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(1, 100, selectedNumber));
+    const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(currentLow.current, currentHigh.current, selectedNumber));
+
+    //Se pone por defecto en 0
+    const [rounds, setRounds] = useState(0)
+
+    useEffect(() => {
+      if(currentGuess === selectedNumber) {
+        onGameOver(rounds)
+      }
+    }, [currentGuess])
+    
 
     console.log(currentGuess);
 
     const nextGuess = direction => {
-        if( (direction === Constants.direction.higher && currentGuess < selectedNumber ) ||
+        if( (direction === Constants.direction.higher && currentGuess > selectedNumber ) ||
         (direction === Constants.direction.lower && currentGuess < selectedNumber)) {
             //Esto solo funciona en Android
             // Alert('Pls don\t lie', 'You know that\'s wrong', [{text: 'Sorry', style: 'cancel'}])
             alert('Pls don\t lie')
             return
-        } 
+        }
+
+        if(direction === Constants.direction.lower) {
+          currentHigh.current = currentGuess;
+        } else {
+          currentLow.current = currentGuess;
+        }
+
+        //const nextNum = generateRandomBetween(1, 100, selectedNumber);
+        const nextNum = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);
+        setRounds(currentRounds => setRounds(currentRounds + 1))
+        setCurrentGuess(nextNum);
+
+        // if(nextNum === selectedNumber) {
+        //   alert('You won!!!')
+        // }
     }
 
   return (
