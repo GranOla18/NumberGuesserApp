@@ -3,13 +3,28 @@ import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
 
-const GameOverScreen = ({rounds}) => {
+const restart = (rounds) => {
+    rounds = -1;
+    console.log(rounds)
+  }
+
+const GameOverScreen = ({rounds, numberGuessed, restart}) => {
   return (
       <View style={styles.screen}>
           <Card style={styles.gameOverBox}>
-            <Text style={styles.gameOverMsg}>The game is over!!</Text>
+            <Text style={styles.gameOverTitle}>The game is over!!</Text>
+            <Text>The number guessed is:</Text>
+            <Text style={styles.gameOverMsg}>{numberGuessed}</Text>
             <Text>Took you: {rounds} rounds</Text>
           </Card>
+          <View>
+              <Button
+                title="Restart"
+                style={styles.button}
+                color={Colors.secondary}
+                onPress ={() => {restart()}}
+               />
+          </View>
       </View>
     )
 }
@@ -20,12 +35,19 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center'
     },
+    gameOverTitle: {
+        fontSize: 26,
+        color: Colors.secondary,
+        margin: 15,
+        textAlign: 'center',
+    },
     gameOverMsg: {
         fontSize: 22,
         color: Colors.primary,
+        margin: 10,
     },
     gameOverBox: {
-        shadowColor: Colors.secondary,
+        shadowColor: Colors.tertiary,
     },
 })
 

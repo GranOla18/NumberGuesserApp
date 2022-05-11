@@ -2,5 +2,7 @@
 
 export default {
     primary: '#00afb9',
-    secondary: '#f07167'
+    secondary: '#f07167',
+    tertiary: '#0081a7',
+    quaternary: '#f8edeb',
 }

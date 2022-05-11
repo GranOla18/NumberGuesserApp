@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect} from 'react'
 import { Button, StyleSheet, Text, TextInput, View, Alert } from "react-native";
 import Card from '../components/Card';
 import NumberContainer from '../components/NumberContainer';
+import Colors from '../constants/Colors';
 
 import Constants from '../constants/constants';
 
@@ -51,7 +52,7 @@ const GameScreen = ({selectedNumber, onGameOver}) => {
 
     useEffect(() => {
       if(currentGuess === selectedNumber) {
-        onGameOver(rounds)
+        onGameOver(rounds, currentGuess)
       }
     }, [currentGuess])
     
@@ -88,8 +89,8 @@ const GameScreen = ({selectedNumber, onGameOver}) => {
       <Text>Computer Guess: </Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
-          <Button title='Lower' onPress={ () => {nextGuess(Constants.direction.lower)} } />
-          <Button title='Higher' onPress={ () => {nextGuess(Constants.direction.higher)} } />
+          <Button title='Lower' color={Colors.secondary} onPress={ () => {nextGuess(Constants.direction.lower)} } />
+          <Button title='Higher' color={Colors.primary} onPress={ () => {nextGuess(Constants.direction.higher)} } />
       </Card>
     </View>
   )

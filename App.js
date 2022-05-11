@@ -1,17 +1,27 @@
 import {useState} from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import Header from './components/Header';
 import GameScreen from './screens/GameScreen';
 import StartGameScreen from './screens/StartGameScreen';
 import GameOverScreen from './screens/GameOverScreen';
+import Colors from './constants/Colors';
 
 export default function App() {
   
   const [selectedNumber, setSelectedNumber] = useState(undefined);
-  const [numberOfGuesses, setnumberOfGuesses] = useState(0)
+  const [numberOfGuesses, setNumberOfGuesses] = useState(0);
+  const [numberGuessed, setnumberGuessed] = useState(undefined);
 
-  const gameOverHandler = (rounds) => {
-    setnumberOfGuesses(rounds)
+  const gameOverHandler = (rounds, numberGuessed) => {
+    setNumberOfGuesses(rounds);
+    setnumberGuessed(numberGuessed);
+  }
+
+  const restart = () => {
+    console.log("Restart");
+    content = <StartGameScreen onStartGame={startGameHandler}/>;
+    setSelectedNumber(0);
+    setNumberOfGuesses(0);
   }
 
   const startGameHandler = (number) => {
@@ -24,7 +34,7 @@ export default function App() {
   if( selectedNumber && numberOfGuesses === 0 ) {
     content = <GameScreen selectedNumber={selectedNumber} onGameOver={gameOverHandler} />
   } else if ( selectedNumber && numberOfGuesses > 0 ) {
-    content = <GameOverScreen rounds={numberOfGuesses}/>
+    content = <GameOverScreen rounds={numberOfGuesses} numberGuessed={numberGuessed} restart={restart}/>
   }
     
   // let content = </*StartGameScreen onStartGame = {startGameHandler}/>
@@ -52,4 +62,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1
   },
+  button:{
+    with: 100,
+},
 });
