@@ -8,7 +8,7 @@ const restart = (rounds) => {
     console.log(rounds)
   }
 
-const GameOverScreen = ({rounds, numberGuessed, restart}) => {
+const GameOverScreen = ({rounds, numberGuessed, onRestartGame}) => {
   return (
       <View style={styles.screen}>
           <Card style={styles.gameOverBox}>
@@ -19,10 +19,10 @@ const GameOverScreen = ({rounds, numberGuessed, restart}) => {
           </Card>
           <View>
               <Button
-                title="Restart"
+                title="Restart Game"
                 style={styles.button}
                 color={Colors.secondary}
-                onPress ={() => {restart()}}
+                onPress ={() => {onRestartGame()}}
                />
           </View>
       </View>

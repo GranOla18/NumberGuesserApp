@@ -17,10 +17,9 @@ export default function App() {
     setnumberGuessed(numberGuessed);
   }
 
-  const restart = () => {
+  const restartGame = () => {
     console.log("Restart");
-    content = <StartGameScreen onStartGame={startGameHandler}/>;
-    setSelectedNumber(0);
+    setSelectedNumber(undefined);
     setNumberOfGuesses(0);
   }
 
@@ -34,7 +33,7 @@ export default function App() {
   if( selectedNumber && numberOfGuesses === 0 ) {
     content = <GameScreen selectedNumber={selectedNumber} onGameOver={gameOverHandler} />
   } else if ( selectedNumber && numberOfGuesses > 0 ) {
-    content = <GameOverScreen rounds={numberOfGuesses} numberGuessed={numberGuessed} restart={restart}/>
+    content = <GameOverScreen rounds={numberOfGuesses} numberGuessed={numberGuessed} onRestartGame={restartGame}/>
   }
     
   // let content = </*StartGameScreen onStartGame = {startGameHandler}/>
