@@ -4,7 +4,8 @@ import Card from '../components/Card';
 import NumberContainer from '../components/NumberContainer';
 import Colors from '../constants/Colors';
 
-import Constants from '../constants/constants';
+//De los ahora varios objetos solo trae direction
+import { direction_ as d} from '../constants/constants';
 
 // const generateRandomBetween = ( min, max, exclude ) => {
 //     min = Math.ceil(min);
@@ -60,15 +61,15 @@ const GameScreen = ({selectedNumber, onGameOver}) => {
     console.log(currentGuess);
 
     const nextGuess = direction => {
-        if( (direction === Constants.direction.higher && currentGuess > selectedNumber ) ||
-        (direction === Constants.direction.lower && currentGuess < selectedNumber)) {
+        if( (direction === d.higher && currentGuess > selectedNumber ) ||
+        (direction === d.lower && currentGuess < selectedNumber)) {
             //Esto solo funciona en Android
             // Alert('Pls don\t lie', 'You know that\'s wrong', [{text: 'Sorry', style: 'cancel'}])
             alert('Pls don\t lie')
             return
         }
 
-        if(direction === Constants.direction.lower) {
+        if(direction === d.lower) {
           currentHigh.current = currentGuess;
         } else {
           currentLow.current = currentGuess;
@@ -89,8 +90,8 @@ const GameScreen = ({selectedNumber, onGameOver}) => {
       <Text>Computer Guess: </Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
-          <Button title='Lower' color={Colors.secondary} onPress={ () => {nextGuess(Constants.direction.lower)} } />
-          <Button title='Higher' color={Colors.primary} onPress={ () => {nextGuess(Constants.direction.higher)} } />
+          <Button title='Lower' color={Colors.secondary} onPress={ () => {nextGuess(d.lower)} } />
+          <Button title='Higher' color={Colors.primary} onPress={ () => {nextGuess(d.higher)} } />
       </Card>
     </View>
   )

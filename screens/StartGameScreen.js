@@ -4,12 +4,17 @@ import Card from "../components/Card";
 import Colors from "../constants/Colors";
 import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
+
+import { globalIndexes as limit } from "../constants/constants";
+import { useFetchPokemon } from "../hooks/useFetchPokemon";
  
  const StartGameScreen = ({ onStartGame }) => {
     //useStateSnippet
     const [enteredValue, setEnteredValue] = useState('')
     const [confirmed, setConfirmed] = useState(false)
     const [selectedNumber, setSelectedNumber] = useState(undefined)
+
+    const [name, setName] = useState(undefined)
 
     const numberInputHandler = input => {
         //Todo lo que no sea un 0 o un 9 reemplazalo por un '' 
@@ -27,11 +32,16 @@ import NumberContainer from "../components/NumberContainer";
         const chosenNumber = parseInt(enteredValue);
         //is Not a Number
         //Solo acepta numeros positivos menores a 99
-        if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) return
+        if(isNaN(chosenNumber) || chosenNumber <= limit.MIN_INDEX || chosenNumber > limit.MAX_INDEX) return
         setConfirmed(true)
         setSelectedNumber(chosenNumber)
         setEnteredValue('')
     }
+
+    const setPokemon = async () => {
+        const [name] = await useFetchPokemon(enteredValue);
+        setName(name)
+    } 
 
     let confirmedOutput;
 
@@ -60,7 +70,7 @@ import NumberContainer from "../components/NumberContainer";
                 autoCapitalize='none'
                 autoCorrect={false}
                 keyboardType="number-pad"
-                maxLenght={2}
+                maxLenght={3}
                 onChangeText={numberInputHandler}
                 value={enteredValue}
             />
@@ -84,6 +94,7 @@ import NumberContainer from "../components/NumberContainer";
             </View>
         </Card>
         {confirmedOutput}
+        {name}
      </View>
    )
  }

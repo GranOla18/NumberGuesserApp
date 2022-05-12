@@ -7,7 +7,9 @@ import GameOverScreen from './screens/GameOverScreen';
 import Colors from './constants/Colors';
 
 export default function App() {
-  
+
+  //const endPoint = fetch('https://pokeapi.co/api/v2/pokemon/123')
+
   const [selectedNumber, setSelectedNumber] = useState(undefined);
   const [numberOfGuesses, setNumberOfGuesses] = useState(0);
   const [numberGuessed, setnumberGuessed] = useState(undefined);
