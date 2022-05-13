@@ -27,17 +27,14 @@ const GameOverScreen = ({rounds, numberGuessed, onRestartGame}) => {
                 <Text style={styles.gameOverMsg}>{numberGuessed}</Text>
                 <Text>Took you: {rounds} rounds</Text>
             </Card>
-            <Card style={styles.gameOverBox}>
+            <Card style={styles.gameOverFinalBox}>
                 {pokeInfo}
             </Card>
-            <View>
-                <Button
+            <Button
                     title="Restart Game"
-                    style={styles.button}
                     color={Colors.secondary}
                     onPress ={() => {onRestartGame()}}
                 />
-            </View>
         </View>
         )
 }
@@ -61,6 +58,10 @@ const styles = StyleSheet.create({
     },
     gameOverBox: {
         shadowColor: Colors.tertiary,
+    },
+    gameOverFinalBox: {
+        shadowColor: Colors.tertiary,
+        marginBottom: 20,
     },
 })
 

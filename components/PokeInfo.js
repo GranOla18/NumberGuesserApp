@@ -5,7 +5,7 @@ import { useFetchPokemon } from '../hooks/useFetchPokemon';
 
 const PokeInfo = (props) => {
 
-    const [puchamon, setPuchamon] = useState({name:'', img:''})
+    const [pokemon, setPokemon] = useState({name:'', img:'', type:''})
 
     useEffect(() => {
         if(props.children != 0) {
@@ -16,25 +16,37 @@ const PokeInfo = (props) => {
     }, [props.children])
 
     const setPokemonInfo = async () => {
-        const number = props;
-        const [name, img] = await useFetchPokemon(props.children);
-        setPuchamon({name: name, img: img})
+        const [name, img, type] = await useFetchPokemon(props.children);
+        setPokemon({name: name, img: img, type: type})
     }
      
     return (
-        <View>
-            <Text style={styles.pokeName}>{puchamon.name}</Text>
-            <Image style={styles.pokemonImg} source={{uri: puchamon.img}}/>
+        <View style={styles.pokeContainer}>
+            <Text style={styles.pokeName}>{pokemon.name}</Text>
+            <Text style={styles.pokeType}>Type: {pokemon.type}</Text>
+            <Image style={styles.pokemonImg} source={{uri: pokemon.img}}/>
         </View>
   )
 }
 
 const styles = StyleSheet.create({
+    pokeContainer: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     pokeName: {
         fontSize: 20,
         color: Colors.secondary,
         marginTop: 15,
         fontWeight: "bold",
+        textAlign: 'center',
+        textTransform: 'capitalize',
+    },
+    pokeType: {
+        fontSize: 14,
+        color: Colors.tertiary,
+        marginTop: 5,
+        fontStyle: 'italic',
         textAlign: 'center',
         textTransform: 'capitalize',
     },
