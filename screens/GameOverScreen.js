@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import Card from '../components/Card';
+import PokeInfo from '../components/PokeInfo';
 import Colors from '../constants/Colors';
 
 const restart = (rounds) => {
@@ -9,24 +10,36 @@ const restart = (rounds) => {
   }
 
 const GameOverScreen = ({rounds, numberGuessed, onRestartGame}) => {
-  return (
-      <View style={styles.screen}>
-          <Card style={styles.gameOverBox}>
-            <Text style={styles.gameOverTitle}>The game is over!!</Text>
-            <Text>The number guessed is:</Text>
-            <Text style={styles.gameOverMsg}>{numberGuessed}</Text>
-            <Text>Took you: {rounds} rounds</Text>
-          </Card>
-          <View>
-              <Button
-                title="Restart Game"
-                style={styles.button}
-                color={Colors.secondary}
-                onPress ={() => {onRestartGame()}}
-               />
-          </View>
-      </View>
-    )
+
+    const [pokeInfo, setPokeInfo] = useState(undefined)
+
+    useEffect(() => {
+        if(numberGuessed){
+          setPokeInfo(<PokeInfo>{numberGuessed}</PokeInfo>)
+        }
+      }, [])
+
+    return (
+        <View style={styles.screen}>
+            <Card style={styles.gameOverBox}>
+                <Text style={styles.gameOverTitle}>The game is over!!</Text>
+                <Text>The number guessed is:</Text>
+                <Text style={styles.gameOverMsg}>{numberGuessed}</Text>
+                <Text>Took you: {rounds} rounds</Text>
+            </Card>
+            <Card style={styles.gameOverBox}>
+                {pokeInfo}
+            </Card>
+            <View>
+                <Button
+                    title="Restart Game"
+                    style={styles.button}
+                    color={Colors.secondary}
+                    onPress ={() => {onRestartGame()}}
+                />
+            </View>
+        </View>
+        )
 }
 
 const styles = StyleSheet.create({

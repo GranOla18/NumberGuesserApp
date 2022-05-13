@@ -36,10 +36,11 @@ const styles = StyleSheet.create({
         marginTop: 15,
         fontWeight: "bold",
         textAlign: 'center',
+        textTransform: 'capitalize',
     },
     pokemonImg: {
-      width: 100,
-      height: 100,
+      width: 150,
+      height: 150,
     },
 
 })

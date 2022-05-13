@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         shadowRadius: 6,
         backgroundColor: 'white',
         elevation: 5, //Only Android
-        padding: 20,
+        padding: 15,
         borderRadius: 10
     },
 })
