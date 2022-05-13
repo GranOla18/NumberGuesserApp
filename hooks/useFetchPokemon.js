@@ -3,7 +3,12 @@ import { urls } from "../constants/constants";
 export const useFetchPokemon = async ( dexNum ) => {
     // const resp2 = fetch(`${urls.pokemonPath}/${deluxe}`)
     const response = await fetch(`${urls.pokemonPath}/${dexNum}`)
-    const { name, sprites : { front_default : img} } = await response.json()
+    console.log('response', response)
+    const data = await response.json()
+    const { name, sprites : { front_default : img} } = data
+    console.log('data', data);
+
+    console.log('img', img);
 
     return [
         name,

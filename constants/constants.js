@@ -4,7 +4,7 @@ export const direction_ = {
 }
 
 export const urls = {
-    pokemonPath: 'https://pokeapi.co/api/v2/pokemon/123'
+    pokemonPath: 'https://pokeapi.co/api/v2/pokemon'
 }
 
 //Indices
