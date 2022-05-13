@@ -4,11 +4,6 @@ import Card from '../components/Card';
 import PokeInfo from '../components/PokeInfo';
 import Colors from '../constants/Colors';
 
-const restart = (rounds) => {
-    rounds = -1;
-    console.log(rounds)
-  }
-
 const GameOverScreen = ({rounds, numberGuessed, onRestartGame}) => {
 
     const [pokeInfo, setPokeInfo] = useState(undefined)
