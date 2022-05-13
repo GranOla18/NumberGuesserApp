@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, {useState} from 'react'
 import { Button, StyleSheet, Text, TextInput, View, Image } from "react-native";
 import Card from "../components/Card";
 import Colors from "../constants/Colors";
@@ -6,7 +6,7 @@ import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
 
 import { globalIndexes as limit } from "../constants/constants";
-import { useFetchPokemon } from "../hooks/useFetchPokemon";
+import PokeInfo from "../components/PokeInfo";
  
  const StartGameScreen = ({ onStartGame }) => {
     //useStateSnippet
@@ -14,8 +14,7 @@ import { useFetchPokemon } from "../hooks/useFetchPokemon";
     const [confirmed, setConfirmed] = useState(false)
     const [selectedNumber, setSelectedNumber] = useState(undefined)
 
-    const [name, setName] = useState(undefined)
-    const [puchamon, setPuchamon] = useState({name:'', img:''})
+    const [pokeInfo, setPokeInfo] = useState(undefined)
 
     const numberInputHandler = input => {
         //Todo lo que no sea un 0 o un 9 reemplazalo por un '' 
@@ -28,7 +27,7 @@ import { useFetchPokemon } from "../hooks/useFetchPokemon";
         //Y no esta confirmado
         setConfirmed(false)
     }
-
+    
     const confirmInputHandler = () => {
         const chosenNumber = parseInt(enteredValue);
         //is Not a Number
@@ -41,10 +40,8 @@ import { useFetchPokemon } from "../hooks/useFetchPokemon";
     }
 
     const setPokemon = async () => {
-        const [name, img] = await useFetchPokemon(enteredValue);
-        setName(name)
-        setPuchamon({name: name, img: img})
-    } 
+        setPokeInfo(<PokeInfo>{enteredValue}</PokeInfo>)
+    }     
 
     let confirmedOutput;
 
@@ -59,8 +56,7 @@ import { useFetchPokemon } from "../hooks/useFetchPokemon";
                     onPress={ () => onStartGame(selectedNumber) }
                     color={Colors.tertiary}
                 />
-                <Text style={styles.pokeName}>{name}</Text>
-                <Image style={styles.pokemonImg} source={{uri: puchamon.img}}/>
+                {pokeInfo}
             </Card>
         )
     }
@@ -130,16 +126,6 @@ import { useFetchPokemon } from "../hooks/useFetchPokemon";
      input: {
          width: 50,
          textAlign: 'center'
-     },
-     pokeName: {
-         fontSize: 20,
-         color: Colors.secondary,
-         marginTop: 15,
-         fontWeight: "bold",
-     },
-     pokemonImg: {
-       width: 100,
-       height: 100,
      },
 
  })
